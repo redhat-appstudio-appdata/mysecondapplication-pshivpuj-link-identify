@@ -1,0 +1,51 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  creationTimestamp: null
+  name: mysecondapplication-java-quarkus-sample
+  namespace: pshivpuj
+spec:
+  params:
+  - name: git-revision
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      annotations:
+        build.appstudio.openshift.io/application: mysecondapplication
+        build.appstudio.openshift.io/build: "true"
+        build.appstudio.openshift.io/component: mysecondapplication-java-quarkus-sample
+        build.appstudio.openshift.io/type: build
+        build.appstudio.openshift.io/version: "0.1"
+        pipelines.appstudio.openshift.io/type: build
+      creationTimestamp: null
+      generateName: mysecondapplication-java-quarkus-sample-
+      labels:
+        build.appstudio.openshift.io/application: mysecondapplication
+        build.appstudio.openshift.io/build: "true"
+        build.appstudio.openshift.io/component: mysecondapplication-java-quarkus-sample
+        build.appstudio.openshift.io/type: build
+        build.appstudio.openshift.io/version: "0.1"
+        pipelines.appstudio.openshift.io/type: build
+      namespace: pshivpuj
+    spec:
+      params:
+      - name: git-url
+        value: https://github.com/devfile-samples/devfile-sample-code-with-quarkus.git
+      - name: output-image
+        value: quay.io/redhat-appstudio/user-workload:pshivpuj-mysecondapplication-java-quarkus-sample-$(tt.params.git-revision)
+      - name: dockerfile
+        value: https://raw.githubusercontent.com/devfile-samples/devfile-sample-code-with-quarkus/main/src/main/docker/Dockerfile.jvm.staged
+      pipelineRef:
+        bundle: quay.io/redhat-appstudio/build-templates-bundle:13f5d9c921b3f727684a00084037f673a0dc4273
+        name: docker-build
+      workspaces:
+      - name: workspace
+        persistentVolumeClaim:
+          claimName: appstudio
+        subPath: mysecondapplication-java-quarkus-sample/$(tt.params.git-revision)
+      - name: registry-auth
+        secret:
+          secretName: redhat-appstudio-registry-pull-secret
+    status: {}
+status: {}
