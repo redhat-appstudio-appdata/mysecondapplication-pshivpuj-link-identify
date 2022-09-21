@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: mysecondapplication-java-quarkus-sample
+  namespace: pshivpuj
+spec:
+  replicas: 1
+  selector: {}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio/user-workload@sha256:a4a180720cd7d2a19addeda6490243bdd384ddf70ee6189c7677fdc29b805c34
+        name: container-image
+        resources: {}
+status: {}
