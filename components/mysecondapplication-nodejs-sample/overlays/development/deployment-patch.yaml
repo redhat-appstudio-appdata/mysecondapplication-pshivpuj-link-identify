@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  name: mysecondapplication-nodejs-sample
+  namespace: pshivpuj
+spec:
+  replicas: 1
+  selector: {}
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - image: quay.io/redhat-appstudio/user-workload@sha256:7ecf8e7842f9de2cbd290499f57c980b938da9653eb6ca1bbec39fe8ae348fa4
+        name: container-image
+        resources: {}
+status: {}
