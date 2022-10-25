@@ -13,7 +13,7 @@ spec:
       creationTimestamp: null
     spec:
       containers:
-      - image: quay.io/redhat-appstudio/user-workload@sha256:a4a180720cd7d2a19addeda6490243bdd384ddf70ee6189c7677fdc29b805c34
+      - image: quay.io/redhat-appstudio/user-workload:pshivpuj-mysecondapplication-java-quarkus-sample
         name: container-image
         resources: {}
 status: {}
